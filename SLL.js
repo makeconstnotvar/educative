@@ -9,6 +9,7 @@ class SllNode {
 class SinglyLinkedList {
   constructor() {
     this.head = null;
+    this.len = 0;
   }
 
   get isEmpty() {
@@ -29,6 +30,7 @@ class SinglyLinkedList {
       this.head = node;
     else
       this.last.nextSibling = node;
+    this.len++;
     return this;
   }
 
@@ -36,18 +38,21 @@ class SinglyLinkedList {
     let node = new SllNode(data);
     node.nextSibling = this.head;
     this.head = node;
+    this.len++;
     return this;
   };
 
   delete(data) {
     if (this.head.data === data) {
       this.head = this.head.nextSibling;
+      this.len--;
       return true;
     }
     let current = this.head;
     while (current.nextSibling != null) {
       if (current.nextSibling.data === data) {
         current.nextSibling = current.nextSibling.nextSibling;
+        this.len--;
         return true
       } else
         current = current.nextSibling;
@@ -60,19 +65,23 @@ class SinglyLinkedList {
       return false;
     if (this.head.nextSibling == null) {
       this.head = null;
+      this.len--;
       return true;
     }
     let current = this.head;
     while (current.nextSibling.nextSibling != null) {
       current = current.nextSibling;
     }
+    this.len--;
     current.nextSibling = null;
     return true;
   }
 
   deleteAtHead() {
-    if (!this.isEmpty)
-      this.head = this.head.nextSibling
+    if (this.isEmpty)
+      return false;
+    this.len--;
+    this.head = this.head.nextSibling
     return this;
   };
 
@@ -98,6 +107,14 @@ class SinglyLinkedList {
     }
 
   }
+
+  get length() {
+    return this.len;
+  }
+
+  reverse() {
+    
+  }
 }
 
 module.exports = {SinglyLinkedList, SllNode}
@@ -118,7 +135,7 @@ list.deleteAtHead();
 list.deleteAtHead();
 
 list.log();
-
+console.log("length ", list.length)
 list.delete(3);
 
 list.log();
@@ -128,5 +145,10 @@ list.deleteAtTail();
 list.deleteAtTail();
 list.deleteAtTail();
 list.deleteAtTail();
+list.deleteAtTail();
+list.deleteAtTail();
+list.deleteAtTail();
+list.deleteAtTail();
 
 list.log();
+console.log("length ", list.length)
