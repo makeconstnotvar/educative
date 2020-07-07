@@ -2,7 +2,6 @@ class SllNode {
   constructor(data) {
     this.data = data;
     this.nextSibling = null;
-
   }
 }
 
@@ -113,42 +112,30 @@ class SinglyLinkedList {
   }
 
   reverse() {
-    
+    let reversed = null, tail = null;
+    let current = this.head;
+    while (current != null) {
+     tail = current.nextSibling;
+     current.nextSibling = reversed;
+     reversed = current;
+     current = tail;
+    }
+    this.head = reversed;
   }
 }
-
-module.exports = {SinglyLinkedList, SllNode}
 
 let list = new SinglyLinkedList();
 
 for (let i = 0; i < 10; i++) {
   list = list.insertAtTail(i);
 }
+list.log();
+
+list.reverse();
 
 list.log();
 
-let found = list.search(5)
+console.log(list.length);
 
-console.dir(found);
 
-list.deleteAtHead();
-list.deleteAtHead();
-
-list.log();
-console.log("length ", list.length)
-list.delete(3);
-
-list.log();
-
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-list.deleteAtTail();
-
-list.log();
-console.log("length ", list.length)
+module.exports = {SinglyLinkedList, SllNode}
