@@ -1,7 +1,7 @@
 class SllNode {
   constructor(data) {
     this.data = data;
-    this.nextSibling = null;
+    this.next = null;
   }
 }
 
@@ -17,8 +17,8 @@ class SinglyLinkedList {
 
   get last() {
     let current = this.head;
-    while (current.nextSibling != null) {
-      current = current.nextSibling;
+    while (current.next != null) {
+      current = current.next;
     }
     return current;
   }
@@ -28,14 +28,14 @@ class SinglyLinkedList {
     if (this.isEmpty)
       this.head = node;
     else
-      this.last.nextSibling = node;
+      this.last.next = node;
     this.len++;
     return this;
   }
 
   insertAtHead(data) {
     let node = new SllNode(data);
-    node.nextSibling = this.head;
+    node.next = this.head;
     this.head = node;
     this.len++;
     return this;
@@ -43,18 +43,18 @@ class SinglyLinkedList {
 
   delete(data) {
     if (this.head.data === data) {
-      this.head = this.head.nextSibling;
+      this.head = this.head.next;
       this.len--;
       return true;
     }
     let current = this.head;
-    while (current.nextSibling != null) {
-      if (current.nextSibling.data === data) {
-        current.nextSibling = current.nextSibling.nextSibling;
+    while (current.next != null) {
+      if (current.next.data === data) {
+        current.next = current.next.next;
         this.len--;
         return true
       } else
-        current = current.nextSibling;
+        current = current.next;
     }
     return false;
   };
@@ -62,17 +62,17 @@ class SinglyLinkedList {
   deleteAtTail() {
     if (this.isEmpty)
       return false;
-    if (this.head.nextSibling == null) {
+    if (this.head.next == null) {
       this.head = null;
       this.len--;
       return true;
     }
     let current = this.head;
-    while (current.nextSibling.nextSibling != null) {
-      current = current.nextSibling;
+    while (current.next.next != null) {
+      current = current.next;
     }
     this.len--;
-    current.nextSibling = null;
+    current.next = null;
     return true;
   }
 
@@ -80,14 +80,14 @@ class SinglyLinkedList {
     if (this.isEmpty)
       return false;
     this.len--;
-    this.head = this.head.nextSibling
+    this.head = this.head.next
     return this;
   };
 
   search(data) {
     let current = this.head;
-    while (current.data !== data && current.nextSibling != null) {
-      current = current.nextSibling;
+    while (current.data !== data && current.next != null) {
+      current = current.next;
     }
     return current || null
   };
@@ -100,7 +100,7 @@ class SinglyLinkedList {
       let current = this.head;
       while (current != null) {
         results.push(current.data);
-        current = current.nextSibling;
+        current = current.next;
       }
       console.log(results.join(' -> '))
     }
@@ -115,27 +115,41 @@ class SinglyLinkedList {
     let reversed = null, tail = null;
     let current = this.head;
     while (current != null) {
-     tail = current.nextSibling;
-     current.nextSibling = reversed;
-     reversed = current;
-     current = tail;
+      tail = current.next;
+      current.next = reversed;
+      reversed = current;
+      current = tail;
     }
     this.head = reversed;
+  }
+
+  get hasLoop() {
+    let slow = this.head,
+      fast = this.head;
+    while (slow != null & fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = slow.next.next;
+      if (slow === fast)
+        return true;
+    }
+    return false;
   }
 }
 
 let list = new SinglyLinkedList();
 
-for (let i = 0; i < 10; i++) {
+for (let i = 1; i <= 9; i++) {
   list = list.insertAtTail(i);
 }
+
 list.log();
 
 list.reverse();
 
 list.log();
 
-console.log(list.length);
+console.log('hasLoop', list.hasLoop);
+console.log('length', list.length);
 
 
 module.exports = {SinglyLinkedList, SllNode}
