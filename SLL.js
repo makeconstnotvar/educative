@@ -128,7 +128,7 @@ class SinglyLinkedList {
       fast = this.head;
     while (slow != null & fast != null && fast.next != null) {
       slow = slow.next;
-      fast = slow.next.next;
+      fast = fast.next.next;
       if (slow === fast)
         return true;
     }
@@ -138,18 +138,20 @@ class SinglyLinkedList {
 
 let list = new SinglyLinkedList();
 
-for (let i = 1; i <= 9; i++) {
+for (let i = 1; i <= 18; i++) {
   list = list.insertAtTail(i);
 }
 
 list.log();
 
 list.reverse();
+ //list.head.next.next.next.next.next  = list.head.next;
+if(!list.hasLoop){
+  console.log('hasLoop', list.hasLoop);
+  console.log('length', list.length);
+}
 
-list.log();
 
-console.log('hasLoop', list.hasLoop);
-console.log('length', list.length);
 
 
 module.exports = {SinglyLinkedList, SllNode}
