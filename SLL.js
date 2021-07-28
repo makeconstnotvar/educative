@@ -134,24 +134,44 @@ class SinglyLinkedList {
     }
     return false;
   }
+
+  findMid() {
+    const midIndex = Math.ceil(this.len / 2);
+    /*
+    let idx = 1;
+    let current = this.head;
+    while (idx < midIndex && current.next != null) {
+      idx++;
+      current = current.next;
+    }
+    return current.data;
+    */
+    if (!this.isEmpty) {
+      let slow = this.head;
+      let fast = this.head;
+      while (slow.next != null && fast.next != null && fast.next.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+      }
+      return slow.data;
+    }
+  }
 }
 
 let list = new SinglyLinkedList();
 
-for (let i = 1; i <= 18; i++) {
+for (let i = 1; i <= 3; i++) {
   list = list.insertAtTail(i);
 }
 
 list.log();
 
 list.reverse();
- //list.head.next.next.next.next.next  = list.head.next;
-if(!list.hasLoop){
+//list.head.next.next.next.next.next  = list.head.next;
+if (!list.hasLoop) {
   console.log('hasLoop', list.hasLoop);
   console.log('length', list.length);
 }
-
-
-
+console.log('mid', list.findMid());
 
 module.exports = {SinglyLinkedList, SllNode}
