@@ -34,7 +34,7 @@ let myStack = new Stack();
 for (let i = 0; i < 5; i++) {
   myStack.push(i);
 }
-
+//1
 console.log("Is stack empty? " + myStack.isEmpty());
 console.log("top: " + myStack.getTop());
 
