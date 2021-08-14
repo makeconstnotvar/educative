@@ -107,6 +107,10 @@ class SinglyLinkedList {
 
   }
 
+  getHead() {
+    return this.head;
+  }
+
   get length() {
     return this.len;
   }
@@ -156,22 +160,45 @@ class SinglyLinkedList {
       return slow.data;
     }
   }
+
+  findNth() {
+
+  }
+
+  removeDuplicates() {
+
+  }
+
 }
 
 let list = new SinglyLinkedList();
 
-for (let i = 1; i <= 3; i++) {
+for (let i = 1; i <= 5; i++) {
   list = list.insertAtTail(i);
 }
 
 list.log();
 
-list.reverse();
+//list.reverse();
 //list.head.next.next.next.next.next  = list.head.next;
 if (!list.hasLoop) {
   console.log('hasLoop', list.hasLoop);
   console.log('length', list.length);
 }
-console.log('mid', list.findMid());
+//console.log('mid', list.findMid());
+
+function func(head) {
+  if (head == null) {
+    return;
+  }
+  console.log('func',head.data);
+
+  if (head.next) {
+    func(head.next.next);
+  }
+  console.log('func',head.data);
+}
+
+func(list.getHead());
 
 module.exports = {SinglyLinkedList, SllNode}
