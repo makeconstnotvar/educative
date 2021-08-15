@@ -2,22 +2,27 @@ class Queue {
   constructor() {
     this.items = [];
   }
-  enqueue(element){
+
+  push(element) {
     this.items.push(element);
   }
-  dequeue(){
+
+  pop() {
     return this.items.shift();
   }
-  isEmpty(){
+
+  get empty() {
     return this.items.length == 0;
   }
-  getFront(){
-    return this.items[0];
+
+  get front() {
+    const len = this.items.length;
+    return len == 0 ? null : this.items[0];
   }
-  size(){
+
+  get size() {
     return this.items.length;
   }
 }
 
-const myQueue = new Queue();
-console.log("You have successfully created a Queue.");
+module.exports = Queue;
