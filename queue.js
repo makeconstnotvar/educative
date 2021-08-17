@@ -1,13 +1,13 @@
 class Queue {
-  constructor() {
-    this.items = [];
+  constructor(items = []) {
+    this.items = items;
   }
 
   push(element) {
     this.items.push(element);
   }
 
-  pop() {
+  shift() {
     return this.items.shift();
   }
 
@@ -22,6 +22,10 @@ class Queue {
 
   get size() {
     return this.items.length;
+  }
+
+  get data() {
+    return this.items;
   }
 }
 
