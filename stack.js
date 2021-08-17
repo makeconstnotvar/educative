@@ -1,18 +1,19 @@
 class Stack {
-  constructor() {
-    this.items = [];
-    this.top = null;
+  constructor(items = []) {
+    this.items = items;
+    let len = items.length;
+    this.last = len ? items[len - 1] : null;
   }
 
   push(element) {
     this.items.push(element);
-    this.top = element;
+    this.last = element;
   }
 
   pop() {
     const last = this.items.pop();
     const len = this.items.length;
-    this.top = (!last || len == 0) ? null : this.items[len - 1]
+    this.last = (!last || len == 0) ? null : this.items[len - 1]
     return last;
   }
 
@@ -20,8 +21,8 @@ class Stack {
     return this.items.length == 0;
   }
 
-  getTop() {
-    return this.top;
+  get top() {
+    return this.last;
   }
 
   get size() {
