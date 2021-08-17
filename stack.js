@@ -30,7 +30,7 @@ class Stack {
   }
 
   get data() {
-    return this.items;
+    return this.items || [];
   }
 }
 
