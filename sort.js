@@ -5,19 +5,16 @@ function sort1(stack) {
   let val;
   while (!stack.empty) {
     val = stack.pop();
-    if (val <= temp.last) {
-      temp.push(val);
-    } else {
-      while (!temp.empty) {
-        stack.push(temp.pop());
-      }
-      temp.push(val);
+
+    while (!temp.empty && temp.last > val) {
+      stack.push(temp.pop());
+      //temp.pop();
     }
+
+    temp.push(val);
   }
-  while (!temp.empty) {
-    stack.push(temp.pop());
-  }
-  return stack;
+
+  return temp;
 }
 
 function sort2(stack) {
@@ -45,7 +42,8 @@ function getRandomArbitrary(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-const len = 50;
+
+const len = 1000;
 const items = new Array(len)
 for (let i = 0; i < len; i++) {
   items[i] = getRandomArbitrary(0, 100);
@@ -55,7 +53,7 @@ for (let i = 0; i < len; i++) {
 const stack = new Stack(items);
 
 let start = process.hrtime();
-const sorted = sort2(stack);
+const sorted = sort1(stack);
 let stop = process.hrtime(start)
 console.log(`Время: ${(stop[0] * 1e9 + stop[1]) / 1e9} сек`)
-console.log(sorted.data);
+//console.log(sorted.data);
