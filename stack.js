@@ -1,8 +1,8 @@
 class Stack {
   constructor(items = []) {
-    this.items = items;
+    this.items = items.reverse();
     let len = items.length;
-    this.last = len ? items[len - 1] : null;
+    this.last = len ? this.items[len - 1] : null;
   }
 
   push(element) {
