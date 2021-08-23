@@ -32,6 +32,10 @@ class Stack {
   get data() {
     return this.items || [];
   }
+
+  log() {
+    console.log(this.items);
+  }
 }
 
 module.exports = Stack;
