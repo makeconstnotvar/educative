@@ -140,16 +140,6 @@ class SinglyLinkedList {
   }
 
   findMid() {
-    const midIndex = Math.ceil(this.len / 2);
-    /*
-    let idx = 1;
-    let current = this.head;
-    while (idx < midIndex && current.next != null) {
-      idx++;
-      current = current.next;
-    }
-    return current.data;
-    */
     if (!this.isEmpty) {
       let slow = this.head;
       let fast = this.head;
@@ -168,37 +158,6 @@ class SinglyLinkedList {
   removeDuplicates() {
 
   }
-
 }
-
-let list = new SinglyLinkedList();
-
-for (let i = 1; i <= 5; i++) {
-  list = list.insertAtTail(i);
-}
-
-list.log();
-
-//list.reverse();
-//list.head.next.next.next.next.next  = list.head.next;
-if (!list.hasLoop) {
-  console.log('hasLoop', list.hasLoop);
-  console.log('length', list.length);
-}
-//console.log('mid', list.findMid());
-
-function func(head) {
-  if (head == null) {
-    return;
-  }
-  console.log('func',head.data);
-
-  if (head.next) {
-    func(head.next.next);
-  }
-  console.log('func',head.data);
-}
-
-func(list.getHead());
 
 module.exports = {SinglyLinkedList, SllNode}
